@@ -1,6 +1,8 @@
 package single_user
 
 import (
+	"log"
+
 	"github.com/olusamimaths/os-algorithms/memory"
 	prog "github.com/olusamimaths/os-algorithms/program"
 )
@@ -30,7 +32,6 @@ func CreateSingleUserProgram() prog.Program {
 
 	program := prog.NewProgram(prog.CreateNewProgramInput{
 		Id:           "Job 1",
-		Size:         50,
 		Instructions: []prog.Instruction{inst1, inst2, inst3, inst4},
 	})
 	return program
@@ -45,7 +46,7 @@ func LoadJobsToMemory() {
 	mainMemorySize := mainMemory.GetSize()
 
 	if programSize > mainMemorySize {
-		print("Can't load program ", program.GetSize())
+		log.Fatal("Error: Program Too Big: \n\n\t\tCan't load program ",program.GetId(), " with size: ",  program.GetSize(), " into main memory")
 	}
 	mainMemory.LoadJob(program)
 }

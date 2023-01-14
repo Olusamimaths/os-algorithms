@@ -5,21 +5,21 @@ type Program interface {
 	GetSize() int
 	GetId() string
 	GetInstructions() InstructionsType
+	ComputeProgramSize() int
 }
 
 type InstructionsType []Instruction
 
 type program struct {
 	id string
-	size int
 	instructions InstructionsType
 }
 
 func (p *program) Run() {
-	print("Running program ", p.id, " with size ", p.size)
+	print("Running program ", p.id, " with size ", p.GetSize())
 }
 func (p *program) GetSize() int {
-	return p.size
+	return p.ComputeProgramSize()
 }
 func (p *program) GetId() string {
 	return p.id
@@ -27,14 +27,23 @@ func (p *program) GetId() string {
 func (p *program) GetInstructions() InstructionsType {
 	return p.instructions
 }
+func(p * program) ComputeProgramSize() int {
+	sum := 0
+	if len(p.instructions) == 0 {
+		return sum
+	}
+	for _, inst := range p.instructions {
+		sum += inst.GetSize()
+	}
+	return sum
+}
 
 type CreateNewProgramInput struct {
 	Id string
-	Size int
 	Instructions InstructionsType
 }
 
 func NewProgram(input CreateNewProgramInput) Program{
-	return &program{size: input.Size, id: input.Id, instructions: input.Instructions }
+	return &program{ id: input.Id, instructions: input.Instructions }
 }
 
