@@ -2,39 +2,45 @@ package memory
 
 import "github.com/olusamimaths/os-algorithms/program"
 
+type RunningJobs []program.Program
+
 type Memory interface {
 	GetSize() int
 	IsMemoryFree() bool
 	GetSizeUsed() int
 	LoadJob(job program.Program)
+	GetRunningJobs() RunningJobs
 }
 
 type memory struct {
-	Size int
-	Used int
-	IsFree bool
-	RunningJobs []program.Program
+	size int
+	used int
+	isFree bool
+	runningJobs RunningJobs
 }
 
 func (m *memory) GetSize() int {
-	return m.Size
+	return m.size
 }
 
 func (m *memory) IsMemoryFree() bool {
-	return m.IsFree
+	return m.isFree
 }
 
 func (m *memory) GetSizeUsed() int {
-	return m.Used
+	return m.used
+}
+func (m *memory) GetRunningJobs() RunningJobs {
+	return m.runningJobs
 }
 
 func(m *memory) LoadJob(job program.Program) {
 	jobSize := job.GetSize()
-	m.IsFree = false
-	m.Size += jobSize
-	m.RunningJobs = append(m.RunningJobs, job)
+	m.isFree = false
+	m.size += jobSize
+	m.runningJobs = append(m.runningJobs, job)
 }
 
 func NewMainMemory() Memory {
-	return &memory{Size: 1024, Used: 0, IsFree: true, RunningJobs: []program.Program{}}
+	return &memory{size: 1024, used: 0, isFree: true, runningJobs: RunningJobs{}}
 }

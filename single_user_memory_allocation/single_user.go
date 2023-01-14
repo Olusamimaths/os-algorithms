@@ -1,7 +1,7 @@
 package single_user
 
 import (
-	"log"
+	"fmt"
 
 	"github.com/olusamimaths/os-algorithms/memory"
 	prog "github.com/olusamimaths/os-algorithms/program"
@@ -24,7 +24,7 @@ func CreateSingleUserProgram() prog.Program {
 	})
 
 	inst4 := prog.NewInstruction(prog.CreateNewInstructionInput{
-		Size: 30,
+		Size: 3000,
 		Action: `mov   eax, 4  
 				 mov   ebx, 1  
 				 mov   ecx, odd_msg `,
@@ -46,7 +46,22 @@ func LoadJobsToMemory() {
 	mainMemorySize := mainMemory.GetSize()
 
 	if programSize > mainMemorySize {
-		log.Fatal("Error: Program Too Big: \n\n\t\tCan't load program ",program.GetId(), " with size: ",  program.GetSize(), " into main memory")
+		fmt.Print("\tError: Program Too Big: \n\t\tCan't load program ",program.GetId(), " with size: ",  program.GetSize(), " into main memory")
+		return
 	}
+
 	mainMemory.LoadJob(program)
+	fmt.Print("Loaded program ", program.GetId(), " into main memory")
+	PrintMemoryContents(mainMemory)
+}
+
+func PrintMemoryContents(mainMemory memory.Memory) {
+	// jobs := mainMemory.GetRunningJobs()
+	fmt.Printf(`
+		*******************************************************************************
+		*                           Content of Main Memory                            *
+		*******************************************************************************
+
+		Job ID		|	Job Size	| 	Program ID
+	`)
 }
