@@ -3,25 +3,29 @@ package program
 type Program interface {
 	Run()
 	GetSize() int
+	GetId() string
 	GetInstructions() InstructionsType
 }
 
 type InstructionsType []Instruction
 
 type program struct {
-	Id string
-	Size int
-	Instructions InstructionsType
+	id string
+	size int
+	instructions InstructionsType
 }
 
 func (p *program) Run() {
-	print("Running program ", p.Id, " with Size ", p.Size)
+	print("Running program ", p.id, " with size ", p.size)
 }
 func (p *program) GetSize() int {
-	return p.Size
+	return p.size
+}
+func (p *program) GetId() string {
+	return p.id
 }
 func (p *program) GetInstructions() InstructionsType {
-	return p.Instructions
+	return p.instructions
 }
 
 type CreateNewProgramInput struct {
@@ -31,6 +35,6 @@ type CreateNewProgramInput struct {
 }
 
 func NewProgram(input CreateNewProgramInput) Program{
-	return &program{Size: input.Size, Id: input.Id, Instructions: input.Instructions }
+	return &program{size: input.Size, id: input.Id, instructions: input.Instructions }
 }
 
