@@ -7,6 +7,6 @@ import (
 )
 
 func main() {
-	fmt.Print("Single User Memory Allocation\n")
+	fmt.Print("Single User Memory Allocation:\n")
 	single_user.LoadJobsToMemory()
 }

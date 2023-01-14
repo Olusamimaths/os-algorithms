@@ -5,7 +5,8 @@ type Program interface {
 	GetSize() int
 	GetId() string
 	GetInstructions() InstructionsType
-	ComputeProgramSize() int
+	
+	computeProgramSize() int
 }
 
 type InstructionsType []Instruction
@@ -19,7 +20,7 @@ func (p *program) Run() {
 	print("Running program ", p.id, " with size ", p.GetSize())
 }
 func (p *program) GetSize() int {
-	return p.ComputeProgramSize()
+	return p.computeProgramSize()
 }
 func (p *program) GetId() string {
 	return p.id
@@ -27,7 +28,7 @@ func (p *program) GetId() string {
 func (p *program) GetInstructions() InstructionsType {
 	return p.instructions
 }
-func(p * program) ComputeProgramSize() int {
+func(p * program) computeProgramSize() int {
 	sum := 0
 	if len(p.instructions) == 0 {
 		return sum

@@ -47,6 +47,7 @@ func LoadJobsToMemory() {
 
 	if programSize > mainMemorySize {
 		fmt.Print("\tError: Program Too Big: \n\t\tCan't load program ",program.GetId(), " with size: ",  program.GetSize(), " into main memory")
+		fmt.Printf("\n\t\tMain Memory Size: %v", mainMemorySize)
 		return
 	}
 
